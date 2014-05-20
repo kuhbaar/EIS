@@ -3,7 +3,7 @@ package at.ac.tuwien.imw.pdca.cppi.service;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
-import at.ac.tuwien.imw.pdca.cppi.CPPIPlanProcess;
+import at.ac.tuwien.imw.pdca.cppi.*;
 
 public class CPPISimulation {
 	
@@ -18,6 +18,10 @@ public class CPPISimulation {
 	// ...
 	private static CPPIPlanProcess pPro;
 	private static Thread pProThread;
+	private static CPPIDoProcess dPro;
+	private static Thread dProThread;
+	private static CPPICheckProcess cPro;
+	private static Thread cProThread;
 	
 	public static void main(String[] args) {
 
@@ -30,7 +34,12 @@ public class CPPISimulation {
 		pPro = new CPPIPlanProcess();
 		pProThread = new Thread(pPro);
 		pProThread.start();
-		
+		dPro = new CPPIDoProcess();
+		dProThread = new Thread(dPro);
+		dProThread.start();
+		cPro = new CPPICheckProcess();
+		cProThread = new Thread(cPro);
+		cProThread.start();
 		//...
 		
 		new Thread(new CPPIStockPriceGenerator()).start();
