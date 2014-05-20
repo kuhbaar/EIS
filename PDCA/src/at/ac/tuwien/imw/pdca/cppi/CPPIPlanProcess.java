@@ -30,12 +30,13 @@ public class CPPIPlanProcess extends PlanProcess<BigDecimal> {
 	
 	public void run(){
 		while(running){
+			log.info("CPPIPlanProcess started");
 			try {
-				Thread.sleep(1000);
+				Thread.sleep(10000);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
-		
+			//do something
 		}
 	}
 
