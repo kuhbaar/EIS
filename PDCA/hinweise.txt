@@ -1,0 +1,9 @@
+Aus dem Forum - 
+
+Leite im Package "at.ac.tuwien.imw.pdca.cppi" die jeweilige Klasse aus "at.ac.tuwien.imw.pdca" ab und implementiere den entsprechenden Konstruktur und die Methode(n).
+
+Starte die Threads / Prozesse in der Klasse "CPPISimulation" wie in der main-Methode (generisch) darauf hingewiesen ist.
+
+Außerdem beachte, dass du die jeweilige run-Methode einer Prozess-Klasse, falls notwendig, ähnlich wie die run-Methode der Klasse "CPPIStockPriceGenerator" implementiert werden kann.
+
+Denk daran, dass "CPPIService" als Singleton implementiert ist und entsprechend angesprochen werden kann um Werte zu speichern, erneuern oder abzufragen.
