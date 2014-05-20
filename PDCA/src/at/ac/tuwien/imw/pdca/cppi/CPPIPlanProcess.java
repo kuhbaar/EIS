@@ -14,7 +14,6 @@ public class CPPIPlanProcess extends PlanProcess<BigDecimal> {
 	private CPPIPlanConfiguration conf;
 	private CPPIService service;
 	private CPPIValues values;
-	private CPPIObjective objective;
 	
 	public CPPIPlanProcess(){
 		super();
@@ -22,8 +21,6 @@ public class CPPIPlanProcess extends PlanProcess<BigDecimal> {
 		service = CPPIService.getInstance();
 		service.init();
 		service.setPlanConfiguration(conf); // Config für CPPIService-Instanz
-		values = new CPPIValues(conf);
-		service.setCppiValues(values);
 		
 		log.info("PlanProcess initiated CPPI Service");
 	}
@@ -36,7 +33,10 @@ public class CPPIPlanProcess extends PlanProcess<BigDecimal> {
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
-			//do something
+			values = new CPPIValues(conf); //neue Werte berechnen
+			service = CPPIService.getInstance(); //aktuelle Instanz holen
+			service.setCppiValues(values); //aktuelle Werte setzen
+			log.info("CPPIPlanProcess refreshed values");
 		}
 	}
 

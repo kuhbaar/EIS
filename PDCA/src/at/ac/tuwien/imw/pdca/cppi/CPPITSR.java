@@ -13,6 +13,7 @@ import at.ac.tuwien.imw.pdca.MeasuredPerformanceValue;
 public class CPPITSR extends MeasuredPerformanceValue<BigDecimal> {
 	
 	public CPPITSR(BigDecimal value) {
+		
 		super(value);
 	}
 }
