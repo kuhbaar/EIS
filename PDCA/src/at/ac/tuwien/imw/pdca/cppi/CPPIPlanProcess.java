@@ -9,7 +9,7 @@ import at.ac.tuwien.imw.pdca.*;
 import at.ac.tuwien.imw.pdca.cppi.service.CPPIService;
 
 public class CPPIPlanProcess extends PlanProcess<BigDecimal> {
-	private boolean running = false;
+
 	private final static Logger log = LogManager.getLogger(CPPIPlanProcess.class);
 	private CPPIPlanConfiguration conf;
 	private CPPIService service;
@@ -26,23 +26,22 @@ public class CPPIPlanProcess extends PlanProcess<BigDecimal> {
 	}
 	
 	public void run(){
-		while(running){
+		while(true){
 			log.info("CPPIPlanProcess started");
 			try {
 				Thread.sleep(10000);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
-			values = new CPPIValues(conf); //neue Werte berechnen
-			service = CPPIService.getInstance(); //aktuelle Instanz holen
-			service.setCppiValues(values); //aktuelle Werte setzen
-			log.info("CPPIPlanProcess refreshed values");
+			plan();
 		}
 	}
 
 	@Override
 	public void plan() {
-		// TODO Auto-generated method stub
-		
+		values = new CPPIValues(conf); //neue Werte berechnen
+		service = CPPIService.getInstance(); //aktuelle Instanz holen
+		service.setCppiValues(values); //aktuelle Werte setzen
+		log.info("CPPIPlanProcess refreshed values");
 	}
 }
