@@ -36,7 +36,6 @@ public class CPPIDoProcess extends DoProcess {
 	public void operate() {
 		gen.run(); //Measure Aktivität
 		service = CPPIService.getInstance(); ////aktuelle Instanz holen
-		//TODO berechnen und setzen
 		
 	}
 

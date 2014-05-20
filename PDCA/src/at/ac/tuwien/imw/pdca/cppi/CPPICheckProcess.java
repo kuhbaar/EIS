@@ -15,8 +15,6 @@ import at.ac.tuwien.imw.pdca.cppi.service.CPPIStockPriceGenerator;
 public class CPPICheckProcess extends CheckProcess<BigDecimal> {
 	
 	private final static Logger log = LogManager.getLogger(CPPICheckProcess.class.toString());
-	private CPPIObjective objective;
-	private CPPIService service;
 	
 	public CPPICheckProcess(){
 		super();
@@ -31,9 +29,8 @@ public class CPPICheckProcess extends CheckProcess<BigDecimal> {
 			} catch (InterruptedException e) {
 				//e.printStackTrace();
 			}
-			service = CPPIService.getInstance(); //aktuelle Instanz holen
-			objective = new CPPIObjective(service.getCppiValues()); //objective berechnen
-			service.setDeviationValue(this.getCheckResult(objective, service.getCurrentTSR()).getValue()); //Berechnen Deviation und setzen in CPPIService
+			calculate();
+			this.checkingRules.applyCheckingRules(); //berechnet Deviation
 		}
 	}
 
@@ -41,6 +38,18 @@ public class CPPICheckProcess extends CheckProcess<BigDecimal> {
 	public Deviation<BigDecimal> getCheckResult(ObjectiveSetting<BigDecimal> objective,
 			MeasuredPerformanceValue<BigDecimal> performanceMeasureValue) {
 		return new CPPITSRChange(performanceMeasureValue.getValue().subtract(objective.getObjectiveSetting())); //Wt-Ft = Deviation
+	}
+	
+	public void calculate(){
+		CPPIService service = CPPIService.getInstance(); //aktuelle Instanz holen
+		this.objectiveSetting = new CPPIObjective(service.getCppiValues()); //objective berechnen
+		CPPIValues val = service.getCppiValues();
+		CPPIPlanConfiguration conf = service.getPlanConfiguration();
+		//Berechnen von TSR
+		BigDecimal riskless = val.getPartRisklessAsset().multiply(BigDecimal.ONE.add(conf.getRisklessAssetInterest()).pow(1/conf.getRisklessAssetLastDays()));
+		BigDecimal riskful = val.getPartRiskyAsset().multiply(BigDecimal.ONE.add(val.getActualStockPrice().divide(val.getPreviousStockPrice().subtract(BigDecimal.ONE))));
+		this.performanceValue = new CPPITSR(riskful.add(riskless));
+		service.setCurrentTSR(this.performanceValue); //setzen TSR
 	}
 
 }
