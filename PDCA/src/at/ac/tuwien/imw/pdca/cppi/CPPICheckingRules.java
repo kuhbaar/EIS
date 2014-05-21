@@ -35,7 +35,7 @@ public class CPPICheckingRules implements CheckingRules {
 		val.setFloor(floor);
 		
 		//Rechnen und setzen der Cushion C_t
-		BigDecimal cushion = val.getPortfolio().subtract(floor).max(BigDecimal.ZERO).setScale(4);
+		BigDecimal cushion = val.getPortfolio().subtract(floor).max(BigDecimal.ZERO).setScale(4,RoundingMode.HALF_UP);
 		val.setCushion(cushion);
 		
 		log.info("Folgende CheckingRules wurden angewandt: Floor = " + floor.toPlainString() + " , Cushion = " + cushion.toPlainString());
