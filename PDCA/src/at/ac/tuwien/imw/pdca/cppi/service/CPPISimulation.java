@@ -20,6 +20,8 @@ public class CPPISimulation {
 	
 	private static CPPIPlanProcess pPro;
 	private static Thread pProThread;
+	private static CPPIMeasureProcess mPro;
+	private static Thread mProThread;
 	/*private static CPPIDoProcess dPro;
 	private static Thread dProThread;
 	private static CPPICheckProcess cPro;
@@ -36,6 +38,10 @@ public class CPPISimulation {
 		pPro = new CPPIPlanProcess();
 		pProThread = new Thread(pPro);
 		pProThread.start();
+		
+		mPro = new CPPIMeasureProcess();
+		mProThread = new Thread(mPro);
+		mProThread.start();
 		/*dPro = new CPPIDoProcess();
 		dProThread = new Thread(dPro);
 		dProThread.start();
