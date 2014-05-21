@@ -35,6 +35,7 @@ public class CPPICorrectiveActRules implements CorrectiveActRules {
 		val.setPartRiskyAsset(newRiskyAssets);
 		BigDecimal newRisklessAssets = val.getPortfolio().subtract(newRiskyAssets);
 		val.setPartRisklessAsset(newRisklessAssets);
+		log.info("riskyAssetsPercentage: " + newRiskyAssets + ", risklessAssetsPercentage; " + newRisklessAssets);
 		correctiveRiskyAssets = new CPPICorrectiveRiskyAssets(newRiskyAssets.subtract(partRiskyAsset));
 		act.setCorrectiveOutput(correctiveRiskyAssets);	
 			

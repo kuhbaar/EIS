@@ -1,6 +1,7 @@
 package at.ac.tuwien.imw.pdca.cppi;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
@@ -39,7 +40,7 @@ public class CPPIMeasureRules implements CheckingRules {
 				.pow(service.getCurrentPeriod()/conf.getRisklessAssetLastDays()));
 		BigDecimal riskful = val.getPartRiskyAsset().multiply(BigDecimal.ONE.add(tsr.getValue()));
 		portfolio = new CPPIPortfolio(riskful.add(riskless));
-		log.info("new portfolio: " +portfolio.getValue().setScale(4));
+		log.info("new portfolio: " +portfolio.getValue().setScale(4, RoundingMode.HALF_UP));
 		service.setPortfolio(this.portfolio); //setzen Wealth		
 		
 	}

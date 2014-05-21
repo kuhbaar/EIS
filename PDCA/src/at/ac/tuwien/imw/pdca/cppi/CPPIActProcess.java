@@ -40,8 +40,18 @@ public class CPPIActProcess extends ActProcess<BigDecimal, BigDecimal> {
 	public CorrectiveActOutput act(Deviation deviation) {
 		this.correctiveActRules.applyActRules(); //bereitet Deviationberechnung vor
 		BigDecimal correctiveOutput = correctiveRiskyAssets.getValue();
-		log.info(correctiveOutput);
-		return null;
+		if(!(correctiveOutput.equals(null))) {
+			if (correctiveOutput.compareTo(BigDecimal.ZERO) > 0) {
+				log.info("Need to buy " + correctiveOutput +" more risky assets and to sell -" + correctiveOutput + "riskless assets");
+				return correctiveRiskyAssets;
+			}
+			else if (correctiveOutput.compareTo(BigDecimal.ZERO) < 0) {
+				log.info("Need to buy " + correctiveOutput +" more risky assets and to sell -" + correctiveOutput + "riskless assets");
+				return correctiveRiskyAssets;
+			}
+		}
+		log.info("no change neccassery");
+		return correctiveRiskyAssets;
 
 	}
 

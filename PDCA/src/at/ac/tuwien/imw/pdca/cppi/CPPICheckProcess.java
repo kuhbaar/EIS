@@ -21,8 +21,8 @@ public class CPPICheckProcess extends CheckProcess<BigDecimal> {
 	
 	@Override
 	public void run() {
+		log.info("CPPICheckProcess started");
 		while(true){
-			log.info("CPPICheckProcess started");
 			try {
 				Thread.sleep(10000);
 			} catch (InterruptedException e) {
