@@ -10,13 +10,11 @@ import at.ac.tuwien.imw.pdca.cppi.service.CPPIStockPriceGenerator;
 public class CPPIDoProcess extends DoProcess {
 
 	private final static Logger log = LogManager.getLogger(CPPIDoProcess.class);
-	private CPPIStockPriceGenerator gen;
-	private CPPIService service;
-	private CPPITSR tsr;
-	
+
+
 	public CPPIDoProcess(){
 		super();
-		gen = new CPPIStockPriceGenerator();
+		this.doRules = new CPPIDoRules();
 	}
 	
 	@Override
@@ -34,8 +32,7 @@ public class CPPIDoProcess extends DoProcess {
 
 	@Override
 	public void operate() {
-		service = CPPIService.getInstance(); ////aktuelle Instanz holen
-		//sachen berechnen
+		doRules.applyDoRules();
 	}
 
 }
