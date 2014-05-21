@@ -32,7 +32,7 @@ public class CPPIActProcess extends ActProcess<BigDecimal, BigDecimal> {
 			} catch (InterruptedException e) {
 				//e.printStackTrace();
 			}
-			act(null);
+			service.setCorrectiveOutput(act(service.getDeviation()));
 		}
 	}
 
@@ -42,11 +42,11 @@ public class CPPIActProcess extends ActProcess<BigDecimal, BigDecimal> {
 		BigDecimal correctiveOutput = correctiveRiskyAssets.getValue();
 		if(!(correctiveOutput.equals(null))) {
 			if (correctiveOutput.compareTo(BigDecimal.ZERO) > 0) {
-				log.info("Need to buy " + correctiveOutput +" more risky assets and to sell -" + correctiveOutput + "riskless assets");
+				log.info("Need to buy " + correctiveOutput +" more risky assets");
 				return correctiveRiskyAssets;
 			}
 			else if (correctiveOutput.compareTo(BigDecimal.ZERO) < 0) {
-				log.info("Need to buy " + correctiveOutput +" more risky assets and to sell -" + correctiveOutput + "riskless assets");
+				log.info("Need to sell " + correctiveOutput.multiply(new BigDecimal(-1)) + "risky assets");
 				return correctiveRiskyAssets;
 			}
 		}
