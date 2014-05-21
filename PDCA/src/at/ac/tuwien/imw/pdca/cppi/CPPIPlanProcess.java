@@ -19,19 +19,18 @@ public class CPPIPlanProcess extends PlanProcess<BigDecimal> {
 		super();
 		conf = new CPPIPlanConfiguration(); //die Werte sind bereits hard-coded
 		service = CPPIService.getInstance();
-		service.setPlanConfiguration(conf); // Config für CPPIService-Instanz
+		service.setPlanConfiguration(conf); // Config fï¿½r CPPIService-Instanz
 	}
 	
 	public void run(){
-		while(true){
-			log.info("CPPIPlanProcess started");
-			try {
-				Thread.sleep(10000);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-			plan();
+		log.info("CPPIPlanProcess started");
+		try {
+			Thread.sleep(10000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
 		}
+		plan();
+		
 	}
 
 	@Override

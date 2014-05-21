@@ -110,4 +110,52 @@ public class CPPIValues {
 		return confPeriod;
 	}
 
+	public void setConf(CPPIPlanConfiguration conf) {
+		this.conf = conf;
+	}
+
+	public void setPortfolio(BigDecimal portfolio) {
+		this.portfolio = portfolio;
+	}
+
+	public void setTsr(BigDecimal tsr) {
+		this.tsr = tsr;
+	}
+
+	public void setFloor(BigDecimal floor) {
+		this.floor = floor;
+	}
+
+	public void setCushion(BigDecimal cushion) {
+		this.cushion = cushion;
+	}
+
+	public void setExposure(BigDecimal exposure) {
+		this.exposure = exposure;
+	}
+
+	public void setReserveasset(BigDecimal reserveasset) {
+		this.reserveasset = reserveasset;
+	}
+
+	public void setPartRiskyAsset(BigDecimal partRiskyAsset) {
+		this.partRiskyAsset = partRiskyAsset;
+	}
+
+	public void setPartRisklessAsset(BigDecimal partRisklessAsset) {
+		this.partRisklessAsset = partRisklessAsset;
+	}
+
+	public void setPreviousStockPrice(BigDecimal previousStockPrice) {
+		this.previousStockPrice = previousStockPrice;
+	}
+
+	public void setActualStockPrice(BigDecimal actualStockPrice) {
+		this.actualStockPrice = actualStockPrice;
+	}
+
+	public void setConfPeriod(Integer confPeriod) {
+		this.confPeriod = confPeriod;
+	}
+
 }
