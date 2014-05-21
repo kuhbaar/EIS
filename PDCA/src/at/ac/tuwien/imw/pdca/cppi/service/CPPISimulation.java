@@ -44,16 +44,16 @@ public class CPPISimulation {
 		mPro = new CPPIMeasureProcess();
 		mProThread = new Thread(mPro);
 		mProThread.start();
-		
+		cPro = new CPPICheckProcess();
+		cProThread = new Thread(cPro);
+		cProThread.start();
 		aPro = new CPPIActProcess();
 		aProThread = new Thread(aPro);
 		aProThread.start();
 		dPro = new CPPIDoProcess();
 		dProThread = new Thread(dPro);
 		dProThread.start();
-		cPro = new CPPICheckProcess();
-		cProThread = new Thread(cPro);
-		cProThread.start();
+
 		//...
 		
 		new Thread(new CPPIStockPriceGenerator()).start();
