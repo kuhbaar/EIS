@@ -13,11 +13,9 @@ import at.ac.tuwien.imw.pdca.cppi.service.CPPIService;
 
 public class CPPICheckProcess extends CheckProcess<BigDecimal> {
 	private final static Logger log = LogManager.getLogger(CPPICheckProcess.class);
-	private CPPIService service;
 	
 	public CPPICheckProcess(){
 		super();
-		service = CPPIService.getInstance();
 		this.checkingRules = new CPPICheckingRules();
 	}
 	
@@ -30,7 +28,9 @@ public class CPPICheckProcess extends CheckProcess<BigDecimal> {
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
-			log.info("Deviation: ");
+			this.objectiveSetting = new CPPIFloorObjective();
+			objectiveSetting.setObjectiveSetting(CPPIService.getInstance().getCppiValues().getFloor());
+			getCheckResult(objectiveSetting,CPPIService.getInstance().getCurrentTSR());
 		}
 		
 	}
@@ -39,7 +39,7 @@ public class CPPICheckProcess extends CheckProcess<BigDecimal> {
 	public Deviation<BigDecimal> getCheckResult(ObjectiveSetting<BigDecimal> objective,
 			MeasuredPerformanceValue<BigDecimal> performanceMeasureValue) {
 		this.checkingRules.applyCheckingRules();
-		return null;
+		return new CPPICushion(CPPIService.getInstance().getCppiValues().getCushion());
 	}
 
 }
