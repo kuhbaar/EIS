@@ -27,7 +27,11 @@ public class CPPICheckingRules implements CheckingRules {
 		BigDecimal abgelaufeneZeit = new BigDecimal((service.getCurrentPeriod()-val.getConfPeriod()));
 		abgelaufeneZeit = abgelaufeneZeit.divide(new BigDecimal(val.getConf().getRisklessAssetLastDays()),4,RoundingMode.HALF_UP).setScale(4);
 		BigDecimal fristigkeit = BigDecimal.ONE.subtract(abgelaufeneZeit);
-		BigDecimal floor = new BigDecimal(Math.pow(val.getConf().getFloor().divide((BigDecimal.ONE.add(val.getConf().getRisklessAssetInterest())),4,RoundingMode.HALF_UP).doubleValue(),fristigkeit.doubleValue())).setScale(4, RoundingMode.HALF_UP);
+		
+		BigDecimal floor_T = val.getConf().getFloor();
+		double R_t = BigDecimal.ONE.add(val.getConf().getRisklessAssetInterest()).doubleValue();
+		BigDecimal nenner = new BigDecimal (Math.pow(R_t, fristigkeit.doubleValue()));
+		BigDecimal floor = floor_T.divide(nenner,4,RoundingMode.HALF_UP).setScale(4, RoundingMode.HALF_UP);
 		val.setFloor(floor);
 		
 		//Rechnen und setzen der Cushion C_t
