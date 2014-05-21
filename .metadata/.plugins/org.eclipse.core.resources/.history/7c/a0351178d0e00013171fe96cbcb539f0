@@ -1,0 +1,56 @@
+package at.ac.tuwien.imw.pdca.cppi;
+
+import java.math.BigDecimal;
+
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
+
+import at.ac.tuwien.imw.pdca.CheckProcess;
+import at.ac.tuwien.imw.pdca.Deviation;
+import at.ac.tuwien.imw.pdca.MeasuredPerformanceValue;
+import at.ac.tuwien.imw.pdca.ObjectiveSetting;
+import at.ac.tuwien.imw.pdca.cppi.service.CPPIService;
+import at.ac.tuwien.imw.pdca.cppi.service.CPPIStockPriceGenerator;
+
+public class CPPICheckProcess extends CheckProcess<BigDecimal> {
+	
+	private final static Logger log = LogManager.getLogger(CPPICheckProcess.class.toString());
+	
+	public CPPICheckProcess(){
+		super();
+		this.objectiveSetting = new CPPIFloorObjective();
+	}
+
+	@Override
+	public void run() {
+		log.info("CPPICheckProcess process started");
+		while (true) {
+			try {
+				Thread.sleep(10000);
+			} catch (InterruptedException e) {
+				//e.printStackTrace();
+			}
+			calculate();
+			this.checkingRules.applyCheckingRules(); //berechnet Deviation
+		}
+	}
+
+	@Override
+	public Deviation<BigDecimal> getCheckResult(ObjectiveSetting<BigDecimal> objective,
+			MeasuredPerformanceValue<BigDecimal> performanceMeasureValue) {
+		return new CPPITSRChange(performanceMeasureValue.getValue().subtract(objective.getObjectiveSetting())); //Wt-Ft = Deviation
+	}
+	
+	public void calculate(){
+		CPPIService service = CPPIService.getInstance(); //aktuelle Instanz holen 
+		CPPIValues val = service.getCppiValues();
+		objectiveSetting.setObjectiveSetting(val.getFloor());
+		CPPIPlanConfiguration conf = service.getPlanConfiguration();
+		//Berechnen von Wealth
+		BigDecimal riskless = val.getPartRisklessAsset().multiply(BigDecimal.ONE.add(conf.getRisklessAssetInterest()).pow(1/conf.getRisklessAssetLastDays()));
+		BigDecimal riskful = val.getPartRiskyAsset().multiply(BigDecimal.ONE.add(val.getActualStockPrice().divide(val.getPreviousStockPrice().subtract(BigDecimal.ONE))));
+		this.performanceValue = new CPPITSR(riskful.add(riskless));
+		service.setCurrentTSR(this.performanceValue); //setzen TSR
+	}
+
+}

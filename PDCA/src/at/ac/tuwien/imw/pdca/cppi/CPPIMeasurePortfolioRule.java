@@ -1,0 +1,19 @@
+package at.ac.tuwien.imw.pdca.cppi;
+
+import at.ac.tuwien.imw.pdca.CheckingRules;
+import at.ac.tuwien.imw.pdca.cppi.service.CPPIService;
+
+public class CPPIMeasurePortfolioRule implements CheckingRules {
+	private CPPIMeasurePortfolioProcess measure;
+	private CPPIService service;
+	public CPPIMeasurePortfolioRule(CPPIMeasurePortfolioProcess measure){
+		this.measure = measure;
+	}
+	
+	@Override
+	public void applyCheckingRules() {
+		service = CPPIService.getInstance(); //aktuelle Instanz holen
+		service.setDeviationValue(measure.getCheckResult(measure.objectiveSetting, service.getCurrentTSR()).getValue()); //Berechnen Deviation und setzen in CPPIService
+	}
+
+}

@@ -20,27 +20,29 @@ public class CPPIValues {
 	private BigDecimal partRisklessAsset;
 	private BigDecimal previousStockPrice;
 	private BigDecimal actualStockPrice;
+	private Integer confPeriod;
 
 	public CPPIValues(CPPIPlanConfiguration conf) {
 		super();
 		this.conf = conf;
 		portfolio = conf.getPortfolio();
-		BigDecimal riskAssetPercent = conf.getRiskAssetPercent(); // = b = maximaler Aktienanteil?
+		BigDecimal maximumRiskyFraction = conf.getMaximumRiskyFraction(); // = b = maximaler Aktienanteil?
 		BigDecimal m = conf.getLaverage();
 		
-		floor = new BigDecimal(80);
+		confPeriod = conf.getCurrentPeriod();
+		floor = conf.getFloor();
 		cushion = portfolio.subtract(floor).max(BigDecimal.ZERO);
 		exposure = cushion.multiply(m);
 		reserveasset = portfolio.subtract(exposure);
-		partRiskyAsset = cushion.multiply(m).min(riskAssetPercent.multiply(portfolio));
+		partRiskyAsset = cushion.multiply(m).min(maximumRiskyFraction.multiply(portfolio));
 		partRisklessAsset = portfolio.subtract(partRiskyAsset);
 		
-		log.info("Configuration period: "+0+", Floor: "+floor.setScale(4, BigDecimal.ROUND_HALF_UP)+", Cushion: "+cushion.setScale(4, BigDecimal.ROUND_HALF_UP)+", Exposure: "+exposure.setScale(4, BigDecimal.ROUND_HALF_UP)+", Reserveasset: "+reserveasset.setScale(4, BigDecimal.ROUND_HALF_UP)+", PartRisky: "+partRiskyAsset.setScale(4, BigDecimal.ROUND_HALF_UP)+", PartRiskless: "+partRisklessAsset.setScale(4, BigDecimal.ROUND_HALF_UP)+", NewPortfolio: "+portfolio.setScale(4, BigDecimal.ROUND_HALF_UP));
+		log.info("Configuration period: "+confPeriod+", Floor: "+floor.setScale(4, BigDecimal.ROUND_HALF_UP)+", Cushion: "+cushion.setScale(4, BigDecimal.ROUND_HALF_UP)+", Exposure: "+exposure.setScale(4, BigDecimal.ROUND_HALF_UP)+", Reserveasset: "+reserveasset.setScale(4, BigDecimal.ROUND_HALF_UP)+", PartRisky: "+partRiskyAsset.setScale(4, BigDecimal.ROUND_HALF_UP)+", PartRiskless: "+partRisklessAsset.setScale(4, BigDecimal.ROUND_HALF_UP)+", NewPortfolio: "+portfolio.setScale(4, BigDecimal.ROUND_HALF_UP));
 	}
 
 	public CPPIValues(CPPIPlanConfiguration conf, BigDecimal portfolio, BigDecimal tsr, BigDecimal floor, BigDecimal cushion,
 			BigDecimal exposure, BigDecimal reserveasset, BigDecimal partRiskyAsset, BigDecimal partRisklessAsset, BigDecimal previousStockPrice,
-			BigDecimal actualStockPrice) {
+			BigDecimal actualStockPrice, Integer confPeriod) {
 		super();
 		this.conf = conf;
 		this.portfolio = portfolio;
@@ -53,6 +55,7 @@ public class CPPIValues {
 		this.partRisklessAsset = partRisklessAsset;
 		this.previousStockPrice = previousStockPrice;
 		this.actualStockPrice = actualStockPrice;
+		this.confPeriod = confPeriod;
 	}
 
 	public CPPIPlanConfiguration getConf() {
@@ -101,6 +104,10 @@ public class CPPIValues {
 
 	public BigDecimal getActualStockPrice() {
 		return actualStockPrice;
+	}
+	
+	public Integer getConfPeriod() {
+		return confPeriod;
 	}
 
 }

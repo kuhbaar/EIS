@@ -17,6 +17,9 @@ public class CPPIPlanConfiguration extends PlanConfiguration {
 	private BigDecimal risklessAssetInterest = new BigDecimal(0.05);
 	private BigDecimal laverage = new BigDecimal(2.0);
 	private BigDecimal portfolio = new BigDecimal(100);
+	private Integer currentPeriod = new Integer(0);
+	private BigDecimal maximumRiskyFraction = new BigDecimal(1.0);
+	private BigDecimal floor = new BigDecimal(80);
 
 	public CPPIPlanConfiguration() {
 		super();
@@ -99,12 +102,45 @@ public class CPPIPlanConfiguration extends PlanConfiguration {
 		log.info("setting laverage conf:" +laverage);
 		this.laverage = laverage;
 	}
+	
+	public Integer getCurrentPeriod() {
+		return currentPeriod;
+	}
+	
+	public void setCurrentPeriod(Integer currentPeriod) {
+		this.currentPeriod = currentPeriod;
+	}
+	
+	public BigDecimal getMaximumRiskyFraction() {
+		if(maximumRiskyFraction != null) {
+			maximumRiskyFraction = maximumRiskyFraction.setScale(4, BigDecimal.ROUND_HALF_UP);
+		}
+		return maximumRiskyFraction;
+	}
+
+	public void setMaximumRiskyFraction(BigDecimal maximumRiskyFraction) {
+		log.info("setting laverage conf:" +maximumRiskyFraction);
+		this.maximumRiskyFraction = maximumRiskyFraction;
+	}
+	
+	public BigDecimal getFloor() {
+		if(floor != null) {
+			floor = floor.setScale(6, BigDecimal.ROUND_HALF_UP);
+		}
+		return floor;
+	}
+
+	public void setFloor(BigDecimal floor) {
+		this.floor = portfolio;
+	}
+	
 
 	@Override
 	public String toString() {
 		return "RiskMGTPlanConfiguration [riskAssetPercent=" + riskAssetPercent + ", risklessAssetPercent=" + risklessAssetPercent
 				+ ", risklessAssetLastDays=" + risklessAssetLastDays + ", risklessAssetInterest=" + risklessAssetInterest + ", laverage="
-				+ laverage + ", portfolio=" + portfolio + "]";
+				+ laverage + ", maximum risky fraction=" +maximumRiskyFraction + ", portfolio=" + portfolio + ", floor=" + floor
+				+ ", period="+ currentPeriod + "]";
 	}
 
 }

@@ -127,6 +127,7 @@ public class CPPIService {
 	public void updateActualStockPrice() {
 		log.info("updateActualStockPrice");
 		currentPeriod++;
+		planConfiguration.setCurrentPeriod(currentPeriod);
 		previousStockPrice = new BigDecimal(currentStockPrice.doubleValue());
 		currentStockPrice = new BigDecimal(stockPrices.get(currentPeriod % stockPrices.size()));
 		log.info("CurrentStockPrice: "+currentStockPrice);
@@ -139,9 +140,12 @@ public class CPPIService {
 	public Deviation<BigDecimal> getTsrChange() {
 		return tsrChange;
 	}
-
-	public void setTsrChange(Deviation<BigDecimal> tsrChange) {
-		this.tsrChange = tsrChange;
+	
+	public void setPortfolio(MeasuredPerformanceValue<BigDecimal> currentPortfolio) {
+		synchronized (currentPortfolio) {
+			BigDecimal newPortfolio = currentPortfolio.getValue();
+			planConfiguration.setPortfolio(newPortfolio);
+		}
 	}
 
 }
