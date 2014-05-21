@@ -28,14 +28,13 @@ public class CPPICorrectiveActRules implements CorrectiveActRules {
 		CPPIPlanConfiguration conf = service.getPlanConfiguration();
 		
 		BigDecimal partRiskyAsset = val.getPartRiskyAsset();
-		BigDecimal partRisklessAsset= val.getPartRisklessAsset();
 		
 		BigDecimal newRiskyAssets = conf.getLaverage().multiply(val.getCushion())
 				.min(conf.getMaximumRiskyFraction().multiply(val.getPortfolio()));
 		val.setPartRiskyAsset(newRiskyAssets);
 		BigDecimal newRisklessAssets = val.getPortfolio().subtract(newRiskyAssets);
 		val.setPartRisklessAsset(newRisklessAssets);
-		log.info("riskyAssetsPercentage: " + newRiskyAssets + ", risklessAssetsPercentage; " + newRisklessAssets);
+		log.info("riskyAssets: " + newRiskyAssets + ", risklessAssets: " + newRisklessAssets);
 		correctiveRiskyAssets = new CPPICorrectiveRiskyAssets(newRiskyAssets.subtract(partRiskyAsset));
 		act.setCorrectiveOutput(correctiveRiskyAssets);	
 			

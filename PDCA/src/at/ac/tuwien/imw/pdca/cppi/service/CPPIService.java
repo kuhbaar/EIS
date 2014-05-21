@@ -8,8 +8,11 @@ import org.apache.commons.math3.distribution.NormalDistribution;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
+import at.ac.tuwien.imw.pdca.CorrectiveActOutput;
 import at.ac.tuwien.imw.pdca.Deviation;
 import at.ac.tuwien.imw.pdca.MeasuredPerformanceValue;
+import at.ac.tuwien.imw.pdca.cppi.CPPICorrectiveRiskyAssets;
+import at.ac.tuwien.imw.pdca.cppi.CPPICushion;
 import at.ac.tuwien.imw.pdca.cppi.CPPIPlanConfiguration;
 import at.ac.tuwien.imw.pdca.cppi.CPPITSR;
 import at.ac.tuwien.imw.pdca.cppi.CPPITSRChange;
@@ -47,7 +50,11 @@ public class CPPIService {
 
 	//	Wrapper for all cppi values (exposure, reserve asset, etc.) 
 	private CPPIValues cppiValues;
+	
+	private Deviation<BigDecimal> deviation;
 
+	private CorrectiveActOutput<BigDecimal> correctiveOutput;
+	
 	private CPPIService() {
 	}
 
@@ -65,6 +72,8 @@ public class CPPIService {
 		previousStockPrice = new BigDecimal(100);
 		currentTSR = new CPPITSR(new BigDecimal(100));
 		stockPrices = new ArrayList<Integer>(Arrays.asList(new Integer[] {102, 105, 110, 115, 115, 115, 117, 120, 119, 116, 116, 116, 114, 118, 120, 125, 130, 123, 119, 116, 115, 114, 113, 120}));
+		deviation = new CPPICushion(new BigDecimal(0.0));
+		correctiveOutput = new CPPICorrectiveRiskyAssets(new BigDecimal(0.0));
 	}
 
 	public BigDecimal getDeviationValue() {
@@ -147,6 +156,23 @@ public class CPPIService {
 			BigDecimal newPortfolio = currentPortfolio.getValue();
 			cppiValues.setPortfolio(newPortfolio);
 		}
+	}
+
+	public Deviation<BigDecimal> getDeviation() {
+		return deviation;
+	}
+	
+	public void setDeviation(Deviation<BigDecimal> deviation) {
+		this.deviation = deviation;
+		
+	}
+
+	public CorrectiveActOutput<BigDecimal> getCorrectiveOutput() {
+		return correctiveOutput;
+	}
+	
+	public void setCorrectiveOutput(CorrectiveActOutput<BigDecimal> act) {
+		this.correctiveOutput = correctiveOutput;
 	}
 
 }
