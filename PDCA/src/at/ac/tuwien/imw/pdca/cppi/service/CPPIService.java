@@ -144,7 +144,7 @@ public class CPPIService {
 	public void setPortfolio(MeasuredPerformanceValue<BigDecimal> currentPortfolio) {
 		synchronized (currentPortfolio) {
 			BigDecimal newPortfolio = currentPortfolio.getValue();
-			planConfiguration.setPortfolio(newPortfolio);
+			cppiValues.setPortfolio(newPortfolio);
 		}
 	}
 

@@ -20,7 +20,7 @@ public class CPPIMeasureProcess extends CheckProcess<BigDecimal> {
 	
 	public CPPIMeasureProcess(){
 		super();
-		this.checkingRules = new CPPIMeasureRule(this);
+		this.checkingRules = new CPPIMeasureRules(this);
 		this.objectiveSetting = new CPPIFloorObjective();
 		val = service.getCppiValues();
 	}

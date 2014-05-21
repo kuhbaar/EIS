@@ -8,15 +8,15 @@ import org.apache.log4j.Logger;
 import at.ac.tuwien.imw.pdca.CheckingRules;
 import at.ac.tuwien.imw.pdca.cppi.service.CPPIService;
 
-public class CPPIMeasureRule implements CheckingRules {
+public class CPPIMeasureRules implements CheckingRules {
 	private CPPIMeasureProcess measure;
 	private CPPIService service;
 	private CPPIPortfolio portfolio;
 	private CPPITSR tsr;
 	
-	private final static Logger log = LogManager.getLogger(CPPIMeasureRule.class.toString());
+	private final static Logger log = LogManager.getLogger(CPPIMeasureRules.class.toString());
 	
-	public CPPIMeasureRule(CPPIMeasureProcess measure){
+	public CPPIMeasureRules(CPPIMeasureProcess measure){
 		this.measure = measure;
 	}
 	
