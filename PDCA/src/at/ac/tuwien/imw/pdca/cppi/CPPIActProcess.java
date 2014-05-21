@@ -50,7 +50,7 @@ public class CPPIActProcess extends ActProcess<BigDecimal, BigDecimal> {
 				return correctiveRiskyAssets;
 			}
 		}
-		log.info("no change neccassery");
+		log.info("no change neccessary");
 		return correctiveRiskyAssets;
 
 	}
