@@ -19,8 +19,8 @@ public class CPPIDoProcess extends DoProcess {
 	
 	@Override
 	public void run() {
+		log.info("CPPIDoProcess started");
 		while(true){
-			log.info("CPPIDoProcess started");
 			try {
 				Thread.sleep(10000);
 			} catch (InterruptedException e) {
