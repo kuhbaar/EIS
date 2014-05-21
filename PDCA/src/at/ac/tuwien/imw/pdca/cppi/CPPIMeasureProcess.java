@@ -15,13 +15,14 @@ import at.ac.tuwien.imw.pdca.cppi.service.CPPIStockPriceGenerator;
 public class CPPIMeasureProcess extends CheckProcess<BigDecimal> {
 	
 	private final static Logger log = LogManager.getLogger(CPPIMeasureProcess.class.toString());
-	CPPIService service = CPPIService.getInstance();
-	CPPIValues val = service.getCppiValues();
+	private CPPIService service;
+	private CPPIValues val;
 	
 	public CPPIMeasureProcess(){
 		super();
 		this.checkingRules = new CPPIMeasureRules(this);
-		this.objectiveSetting = new CPPIFloorObjective();
+		service = CPPIService.getInstance();
+		this.objectiveSetting = new CPPITSRObjective();
 		val = service.getCppiValues();
 	}
 
@@ -35,7 +36,7 @@ public class CPPIMeasureProcess extends CheckProcess<BigDecimal> {
 				//e.printStackTrace();
 			}
 			objectiveSetting.setObjectiveSetting(service.getCurrentTSR().getValue());
-			this.checkingRules.applyCheckingRules(); //bereitet Deviationberechnung vor
+			this.checkingRules.applyCheckingRules(); //bereitet Deviationberechnung vor und berechnet performance
 			service.setCurrentTSR(this.performanceValue);
 			service.setTSRChange(getCheckResult(this.objectiveSetting, this.performanceValue));
 		}

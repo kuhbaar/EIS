@@ -6,8 +6,8 @@ import at.ac.tuwien.imw.pdca.CorrectiveActOutput;
 
 public class CPPICorrectiveRiskyAssets extends CorrectiveActOutput<BigDecimal> {
 
-	public CPPICorrectiveRiskyAssets(BigDecimal riskAssets) {
-		super(riskAssets);
+	public CPPICorrectiveRiskyAssets(BigDecimal riskyAssets) {
+		super(riskyAssets);
 	}
 
 }

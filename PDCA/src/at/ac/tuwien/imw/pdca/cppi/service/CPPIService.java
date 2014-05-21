@@ -134,6 +134,7 @@ public class CPPIService {
 	}
 
 	public synchronized void setTSRChange(Deviation<BigDecimal> cppitsrChange) {
+		log.info("new stock prices, TSRChange: " + cppitsrChange.getValue());
 		this.tsrChange = cppitsrChange;
 	}
 

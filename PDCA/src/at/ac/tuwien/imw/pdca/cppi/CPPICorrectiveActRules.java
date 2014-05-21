@@ -15,7 +15,7 @@ public class CPPICorrectiveActRules implements CorrectiveActRules {
 	private CPPIService service;
 	private CPPICorrectiveRiskyAssets correctiveRiskyAssets;
 	
-	private final static Logger log = LogManager.getLogger(CPPIMeasureRules.class.toString());
+	private final static Logger log = LogManager.getLogger(CPPICorrectiveActRules.class.toString());
 	
 	public CPPICorrectiveActRules(CPPIActProcess act){
 		this.act = act;
@@ -27,7 +27,6 @@ public class CPPICorrectiveActRules implements CorrectiveActRules {
 		CPPIValues val = service.getCppiValues();
 		CPPIPlanConfiguration conf = service.getPlanConfiguration();
 		
-		//Berechnen von TSR
 		BigDecimal partRiskyAsset = val.getPartRiskyAsset();
 		BigDecimal partRisklessAsset= val.getPartRisklessAsset();
 		
