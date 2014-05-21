@@ -23,9 +23,9 @@ public class CPPISimulation {
 	private static CPPIMeasureProcess mPro;
 	private static Thread mProThread;
 	/*private static CPPIDoProcess dPro;
-	private static Thread dProThread;
+	private static Thread dProThread;*/
 	private static CPPICheckProcess cPro;
-	private static Thread cProThread;*/
+	private static Thread cProThread;
 	
 	public static void main(String[] args) {
 		BasicConfigurator.configure();
@@ -44,10 +44,10 @@ public class CPPISimulation {
 		mProThread.start();
 		/*dPro = new CPPIDoProcess();
 		dProThread = new Thread(dPro);
-		dProThread.start();
+		dProThread.start();*/
 		cPro = new CPPICheckProcess();
 		cProThread = new Thread(cPro);
-		cProThread.start();*/
+		cProThread.start();
 		//...
 		
 		new Thread(new CPPIStockPriceGenerator()).start();
