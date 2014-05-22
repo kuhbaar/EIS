@@ -1,8 +1,5 @@
 package at.ac.tuwien.imw.pdca;
 
-import java.math.BigDecimal;
-
-
 /**
  * 
  * Generic act method result. 

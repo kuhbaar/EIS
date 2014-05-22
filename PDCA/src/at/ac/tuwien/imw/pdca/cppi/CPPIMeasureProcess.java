@@ -10,20 +10,17 @@ import at.ac.tuwien.imw.pdca.Deviation;
 import at.ac.tuwien.imw.pdca.MeasuredPerformanceValue;
 import at.ac.tuwien.imw.pdca.ObjectiveSetting;
 import at.ac.tuwien.imw.pdca.cppi.service.CPPIService;
-import at.ac.tuwien.imw.pdca.cppi.service.CPPIStockPriceGenerator;
 
 public class CPPIMeasureProcess extends CheckProcess<BigDecimal> {
 	
 	private final static Logger log = LogManager.getLogger(CPPIMeasureProcess.class.toString());
 	private CPPIService service;
-	private CPPIValues val;
 	
 	public CPPIMeasureProcess(){
 		super();
 		this.checkingRules = new CPPIMeasureRules(this);
 		service = CPPIService.getInstance();
 		this.objectiveSetting = new CPPITSRObjective();
-		val = service.getCppiValues();
 	}
 
 	@Override
@@ -39,6 +36,7 @@ public class CPPIMeasureProcess extends CheckProcess<BigDecimal> {
 			this.checkingRules.applyCheckingRules(); //bereitet Deviationberechnung vor und berechnet performance
 			service.setCurrentTSR(this.performanceValue);
 			service.setTSRChange(getCheckResult(this.objectiveSetting, this.performanceValue));
+			service.check=true; //now you may check
 		}
 	}
 

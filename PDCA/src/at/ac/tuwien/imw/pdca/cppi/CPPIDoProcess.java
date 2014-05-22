@@ -4,8 +4,6 @@ import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
 import at.ac.tuwien.imw.pdca.DoProcess;
-import at.ac.tuwien.imw.pdca.cppi.service.CPPIService;
-import at.ac.tuwien.imw.pdca.cppi.service.CPPIStockPriceGenerator;
 
 public class CPPIDoProcess extends DoProcess {
 

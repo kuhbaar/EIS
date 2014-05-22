@@ -4,7 +4,6 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import org.apache.commons.math3.distribution.NormalDistribution;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
@@ -15,7 +14,6 @@ import at.ac.tuwien.imw.pdca.cppi.CPPICorrectiveRiskyAssets;
 import at.ac.tuwien.imw.pdca.cppi.CPPICushion;
 import at.ac.tuwien.imw.pdca.cppi.CPPIPlanConfiguration;
 import at.ac.tuwien.imw.pdca.cppi.CPPITSR;
-import at.ac.tuwien.imw.pdca.cppi.CPPITSRChange;
 import at.ac.tuwien.imw.pdca.cppi.CPPIValues;
 
 /**
@@ -26,7 +24,7 @@ import at.ac.tuwien.imw.pdca.cppi.CPPIValues;
 public class CPPIService {
 	
 	private final static Logger log = LogManager.getLogger(CPPIService.class);
-
+	public boolean check = false;
 	private static CPPIService instance;
 
 	//	control interval in seconds
@@ -172,7 +170,7 @@ public class CPPIService {
 	}
 	
 	public void setCorrectiveOutput(CorrectiveActOutput<BigDecimal> act) {
-		this.correctiveOutput = correctiveOutput;
+		this.correctiveOutput = act;
 	}
 
 }

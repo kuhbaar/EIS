@@ -18,7 +18,7 @@ public class CPPIStockPriceGenerator implements Runnable {
 	}
 
 
-	public void run() {
+	public synchronized void run() {
 		log.info("CPPIStockPriceGenerator process started");
 		while (true) {
 			try {
@@ -26,6 +26,7 @@ public class CPPIStockPriceGenerator implements Runnable {
 			} catch (InterruptedException e) {
 				//e.printStackTrace();
 			}
+			System.out.println("----------------------new Period-------------------------------"); //zwecks lesbarkeit der ausgabe
 			CPPIService.getInstance().updateActualStockPrice();
 		}
 	}

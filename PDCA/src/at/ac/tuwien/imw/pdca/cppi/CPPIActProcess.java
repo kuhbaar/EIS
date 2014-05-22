@@ -14,13 +14,11 @@ public class CPPIActProcess extends ActProcess<BigDecimal, BigDecimal> {
 
 	private final static Logger log = LogManager.getLogger(CPPIActProcess.class.toString());
 	private CPPIService service = CPPIService.getInstance();
-	private CPPIValues val;
 	private CorrectiveActOutput<BigDecimal> correctiveRiskyAssets;
 
 	public CPPIActProcess() {
 		super();
 		correctiveActRules = new CPPICorrectiveActRules(this);
-		val = service.getCppiValues();
 	}
 	
 	@Override
@@ -37,7 +35,7 @@ public class CPPIActProcess extends ActProcess<BigDecimal, BigDecimal> {
 	}
 
 	@Override
-	public CorrectiveActOutput act(Deviation deviation) {
+	public CorrectiveActOutput<BigDecimal> act(Deviation<BigDecimal> deviation) {
 		this.correctiveActRules.applyActRules(); //bereitet Deviationberechnung vor
 		BigDecimal correctiveOutput = correctiveRiskyAssets.getValue();
 		if(!(correctiveOutput.equals(null))) {

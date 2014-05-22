@@ -5,7 +5,6 @@ import java.math.BigDecimal;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
-import at.ac.tuwien.imw.pdca.CorrectiveActOutput;
 import at.ac.tuwien.imw.pdca.CorrectiveActRules;
 import at.ac.tuwien.imw.pdca.cppi.service.CPPIService;
 
@@ -37,7 +36,6 @@ public class CPPICorrectiveActRules implements CorrectiveActRules {
 		log.info("riskyAssets: " + newRiskyAssets + ", risklessAssets: " + newRisklessAssets);
 		correctiveRiskyAssets = new CPPICorrectiveRiskyAssets(newRiskyAssets.subtract(partRiskyAsset));
 		act.setCorrectiveOutput(correctiveRiskyAssets);	
-			
 	}
 
 }

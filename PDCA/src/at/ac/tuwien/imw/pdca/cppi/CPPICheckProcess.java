@@ -31,9 +31,12 @@ public class CPPICheckProcess extends CheckProcess<BigDecimal> {
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
-			objectiveSetting.setObjectiveSetting(service.getCppiValues().getFloor());
-			this.checkingRules.applyCheckingRules();
-			service.setDeviation(getCheckResult(objectiveSetting,service.getCurrentTSR()));
+			if(service.check){
+				objectiveSetting.setObjectiveSetting(service.getCppiValues().getFloor());
+				this.checkingRules.applyCheckingRules();
+				service.setDeviation(getCheckResult(objectiveSetting,service.getCurrentTSR()));
+				service.check=false; //wait till new values are measured
+			}
 		}
 	}
 

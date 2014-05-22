@@ -1,22 +1,10 @@
 package at.ac.tuwien.imw.pdca.cppi.service;
 
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
 import org.apache.log4j.BasicConfigurator;
 
 import at.ac.tuwien.imw.pdca.cppi.*;
 
 public class CPPISimulation {
-	
-	private final static Logger log = LogManager.getLogger(CPPISimulation.class);
-	
-	// TODO Implement me
-	// private static CPPIxyProcess xpProcess;
-	// ...
-	
-	// TODO Implement me
-	// private static Thread xyProcessThread;
-	// ...
 	
 	private static CPPIPlanProcess pPro;
 	private static Thread pProThread;
@@ -32,10 +20,6 @@ public class CPPISimulation {
 	public static void main(String[] args) {
 		BasicConfigurator.configure();
 		CPPIService.getInstance().init();
-		
-		//xyProcess = new CPPITSRxy();
-		//xyProcessThread = new Thread(xyProcess);
-		//xyProcessThread.start();
 		
 		pPro = new CPPIPlanProcess();
 		pProThread = new Thread(pPro);
@@ -53,8 +37,6 @@ public class CPPISimulation {
 		dPro = new CPPIDoProcess();
 		dProThread = new Thread(dPro);
 		dProThread.start();
-
-		//...
 		
 		new Thread(new CPPIStockPriceGenerator()).start();
 	}
