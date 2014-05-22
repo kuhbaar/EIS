@@ -31,6 +31,7 @@ public class CPPIDoProcess extends DoProcess {
 	@Override
 	public void operate() {
 		doRules.applyDoRules();
+		System.out.println("----------------------new Period-------------------------------"); //zwecks lesbarkeit der ausgabe
 	}
 
 }

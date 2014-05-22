@@ -20,24 +20,32 @@ public class CPPISimulation {
 	public static void main(String[] args) {
 		BasicConfigurator.configure();
 		CPPIService.getInstance().init();
-		
+		try {
 		pPro = new CPPIPlanProcess();
 		pProThread = new Thread(pPro);
 		pProThread.start();
 		
+		Thread.sleep(1000);
+		
 		mPro = new CPPIMeasureProcess();
 		mProThread = new Thread(mPro);
 		mProThread.start();
+		Thread.sleep(1000);
 		cPro = new CPPICheckProcess();
 		cProThread = new Thread(cPro);
 		cProThread.start();
+		Thread.sleep(1000);
 		aPro = new CPPIActProcess();
 		aProThread = new Thread(aPro);
 		aProThread.start();
+		Thread.sleep(1000);
 		dPro = new CPPIDoProcess();
 		dProThread = new Thread(dPro);
 		dProThread.start();
-		
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		new Thread(new CPPIStockPriceGenerator()).start();
 	}
 }

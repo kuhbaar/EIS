@@ -26,7 +26,6 @@ public class CPPIStockPriceGenerator implements Runnable {
 			} catch (InterruptedException e) {
 				//e.printStackTrace();
 			}
-			System.out.println("----------------------new Period-------------------------------"); //zwecks lesbarkeit der ausgabe
 			CPPIService.getInstance().updateActualStockPrice();
 		}
 	}

@@ -36,7 +36,6 @@ public class CPPIPlanProcess extends PlanProcess<BigDecimal> {
 	@Override
 	public void plan() {
 		values = new CPPIValues(conf); //neue Werte berechnen
-		service = CPPIService.getInstance(); //aktuelle Instanz holen
 		service.setCppiValues(values); //aktuelle Werte setzen
 		log.info("CPPIPlanProcess refreshed values");
 	}
