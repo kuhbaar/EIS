@@ -27,7 +27,7 @@ public class CPPIMeasureProcess extends CheckProcess<BigDecimal> {
 	}
 
 	@Override
-	public void run() {
+	public synchronized void run() {
 		log.info("CPPIMeasureProcess process started");
 		while (true) {
 			try {

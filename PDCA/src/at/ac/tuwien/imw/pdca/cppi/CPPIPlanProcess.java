@@ -22,7 +22,7 @@ public class CPPIPlanProcess extends PlanProcess<BigDecimal> {
 		service.setPlanConfiguration(conf); // Config f�r CPPIService-Instanz
 	}
 	
-	public void run(){
+	public synchronized void run(){
 		log.info("CPPIPlanProcess started");
 		try {
 			Thread.sleep(10000);

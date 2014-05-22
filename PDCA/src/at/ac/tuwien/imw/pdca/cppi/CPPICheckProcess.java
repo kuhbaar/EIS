@@ -23,7 +23,7 @@ public class CPPICheckProcess extends CheckProcess<BigDecimal> {
 	}
 	
 	@Override
-	public void run() {
+	public synchronized void run() {
 		log.info("CPPICheckProcess started");
 		while(true){
 			try {

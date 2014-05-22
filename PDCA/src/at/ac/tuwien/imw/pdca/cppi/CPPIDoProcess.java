@@ -18,7 +18,7 @@ public class CPPIDoProcess extends DoProcess {
 	}
 	
 	@Override
-	public void run() {
+	public synchronized void run() {
 		log.info("CPPIDoProcess started");
 		while(true){
 			try {

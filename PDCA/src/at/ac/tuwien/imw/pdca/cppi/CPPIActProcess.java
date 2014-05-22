@@ -24,7 +24,7 @@ public class CPPIActProcess extends ActProcess<BigDecimal, BigDecimal> {
 	}
 	
 	@Override
-	public void run() {
+	public synchronized void run() {
 		log.info("CPPIActProcess process started");
 		while (true) {
 			try {
